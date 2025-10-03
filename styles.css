@@ -31,6 +31,7 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
   padding: 1rem;
+  user-select: none;
 }
 
 /* ================= GAME CONTAINER ================= */
@@ -185,4 +186,10 @@ position: fixed;
   top: 40%;
   left: 10%;
   width: 80%;
+}
+
+@media screen and (max-width: 600px) {
+  .game-title__part {
+    font-size: 3rem;
+  }
 }
