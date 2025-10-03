@@ -1,0 +1,188 @@
+:root {
+  --bg-main: #591d75;
+  --bg-panel: #2B0040;
+  --bg-cell: #43115B;
+
+  --color-x: #48D2FE;
+  --color-o: #E2BE00;
+  --color-draw: #BCDBF9;
+  --color-title-xo: #DCBF3F;
+  --color-title-tac: #72CFF9;
+
+  --font-main: 'Fredoka One', sans-serif;
+  --radius: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-main);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  padding: 1rem;
+}
+
+/* ================= GAME CONTAINER ================= */
+.game {
+  background: var(--bg-panel);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem 2rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ================= SCOREBOARD ================= */
+.game__scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.scoreboard__panel {
+  flex: 1;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.scoreboard__value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.scoreboard__panel--x { background: var(--color-x); color: #000; }
+.scoreboard__panel--o { background: var(--color-o); color: #000; }
+.scoreboard__panel--draw { background: var(--color-draw); color: #000; }
+
+/* ================= BOARD ================= */
+.game__board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* keeps square */
+}
+
+.board__cell {
+  background: var(--bg-cell);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(2rem, 8vw, 3rem);
+  cursor: pointer;
+  user-select: none;
+  aspect-ratio: 1 / 1;
+}
+
+.board__cell:hover {
+  background: #5a1f77;
+}
+
+/* ================= BUTTON ================= */
+.game__button {
+  background: #F4F6F5;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #000;
+  padding: 0.8rem 2rem;
+  font-family: var(--font-main);
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+
+.game__button:hover {
+  transform: scale(1.05);
+}
+
+/* ================= TITLE ================= */
+.game-title {
+  position: absolute;
+  bottom: 1rem;
+  left: -0.6rem;
+}
+
+.game-title__part {
+  font-size: clamp(7rem, 15vw, 13rem);
+  line-height: 0.6;
+  color: var(--color-title-xo);
+  position: relative;
+}
+
+.game-title__part--tac {
+  color: var(--color-title-tac);
+  z-index: 1;
+}
+
+/* ====== Show Popup ====== */
+.popup {
+position: fixed;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  padding: 20px 40px;
+  border-radius: 12px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+  z-index: 1000;
+  color: black;
+}
+
+/* Slide down */
+.popup.show {
+  top: 10px;
+  opacity: 1;
+}
+
+/* Slide back up */
+.popup.hide {
+  top: -100px;
+  opacity: 0;
+}
+
+/* ===== Line ===== */
+.line {
+  position: absolute;
+  background: white;
+  height: 4px;
+  z-index: 10;
+  width: 0;
+  transform-origin: left center;
+  border-radius: var(--radius);
+  transition: width 0.5s ease;
+  opacity: 1;
+}
+
+.show-line {
+  opacity: 1;
+  top: 40%;
+  left: 10%;
+  width: 80%;
+}
